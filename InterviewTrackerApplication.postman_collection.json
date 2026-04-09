@@ -1,0 +1,117 @@
+{
+  "info": {
+    "_postman_id": "interview-tracker-clean",
+    "name": "Interview Tracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Ajit\",\n  \"email\": \"ajitmishra250@gmail.com\",\n  \"leetCodeUsername\": \"ajitmishra_0110\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/users",
+          "host": ["{{base_url}}"],
+          "path": ["users"]
+        },
+        "description": "Creates a new user with LeetCode username"
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/users",
+          "host": ["{{base_url}}"],
+          "path": ["users"]
+        },
+        "description": "Fetch all users"
+      },
+      "response": []
+    },
+    {
+      "name": "Get User by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/users/1",
+          "host": ["{{base_url}}"],
+          "path": ["users", "1"]
+        },
+        "description": "Fetch a user by ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Analyze User",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/leetcode/user/1",
+          "host": ["{{base_url}}"],
+          "path": ["leetcode", "user", "1"]
+        },
+        "description": "Fetch and analyze LeetCode stats"
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"username\": \"ajitmishra_0110\",\n  \"totalSolved\": 79,\n  \"easy\": 29,\n  \"medium\": 47,\n  \"hard\": 3,\n  \"weakness\": \"Hard Problems\",\n  \"progressPercentage\": 0.0,\n  \"message\": \"Analysis completed successfully\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get User History (Paginated)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/leetcode/user/1/history?page=0&size=5",
+          "host": ["{{base_url}}"],
+          "path": ["leetcode", "user", "1", "history"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "5" }
+          ]
+        },
+        "description": "Fetch paginated history of user stats"
+      },
+      "response": []
+    },
+    {
+      "name": "Leaderboard",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/leetcode/leaderboard?limit=5",
+          "host": ["{{base_url}}"],
+          "path": ["leetcode", "leaderboard"],
+          "query": [
+            { "key": "limit", "value": "5" }
+          ]
+        },
+        "description": "Fetch top users ranked by total solved problems"
+      },
+      "response": []
+    }
+  ]
+}
